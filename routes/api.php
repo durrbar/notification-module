@@ -19,5 +19,5 @@ Route::middleware(['auth:sanctum'])->prefix('v1/user')->group(function () {
         Route::patch('mark-all-as-read', 'markAllAsRead');
         Route::delete('delete-all', 'deleteAll');
     });
-    Route::apiResource('notifications', NotificationController::class)->names('notifications')->only(['index', 'show', 'update', 'destroy']);
+    Route::apiResource('notifications', NotificationController::class)->names('notifications')->except('store');
 });
