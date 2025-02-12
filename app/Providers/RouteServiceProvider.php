@@ -4,6 +4,7 @@ namespace Modules\Notification\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Broadcast;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
+        $this->mapBroadcastRoutes();
     }
 
     /**
@@ -46,5 +48,20 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes(): void
     {
         Route::middleware('api')->prefix('api')->name('api.')->group(module_path($this->name, '/routes/api.php'));
+    }
+
+    /**
+     * Configure broadcasting routes and middleware.
+     */
+    protected function mapBroadcastRoutes(): void
+    {
+        // Register broadcasting routes with middleware
+        Broadcast::routes(['prefix' => 'api/v1', 'middleware' => ['api', 'auth:sanctum']]);
+
+        // Load the channels file if it exists
+        $channelsPath = module_path($this->name, '/routes/channels.php');
+        if (file_exists($channelsPath)) {
+            require $channelsPath;
+        }
     }
 }
