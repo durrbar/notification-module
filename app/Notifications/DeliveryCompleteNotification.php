@@ -2,24 +2,24 @@
 
 namespace Modules\Notification\Notifications;
 
-use Modules\Invoice\Models\Invoice;
+use Modules\Delivery\Models\Delivery;
 use Modules\Notification\Notifications\BaseNotification;
 
-class InvoiceCreatedNotification extends BaseNotification
+class DeliveryCompleteNotification extends BaseNotification
 {
-    public const NOTIFICATION_TYPE = 'invoice';
+    public const NOTIFICATION_TYPE = 'delivery';
 
-    protected Invoice $invoice;
+    protected Delivery $delivery;
     protected $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct(Invoice $invoice, $user)
+    public function __construct(Delivery $delivery, $user)
     {
-        $this->invoice = $invoice;
-
-        parent::__construct($invoice, $user);
+        $this->delivery = $delivery;
+        $this->user = $user;
+        parent::__construct($delivery, $user);
     }
 
     /**
@@ -27,7 +27,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailSubject(): string
     {
-        return __('notification::invoice.created.subject', [], 'Your Invoice Has Been Generated');
+        return __('delivery::completed.subject');
     }
 
     /**
@@ -35,9 +35,9 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailGreeting(): ?string
     {
-        return __('notification::invoice.created.mail_greeting', [
+        return __('delivery::completed.mail_greeting', [
             'name' => $this->user->name,
-        ]) ?? 'Hello,';
+        ]);
     }
 
     /**
@@ -45,9 +45,9 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMessageText(): string
     {
-        return __('notification::invoice.created.message', [
-            'invoice' => $this->invoice->invoice_number,
-            'order' => $this->invoice->order->order_number,
+        return __('delivery::completed.message', [
+            'delivery' => $this->delivery->delivery_number,
+            'order' => $this->delivery->order->order_number,
         ]);
     }
 
@@ -64,7 +64,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailActionText(): string
     {
-        return __('notification::invoice.created.view_invoice', [], 'View Invoice');
+        return __('delivery::completed.view_order_details');
     }
 
     /**
@@ -72,7 +72,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailActionUrl(): string
     {
-        return url('/invoices/' . $this->invoice->id);
+        return url('/delivery/' . $this->delivery->id);
     }
 
     /**
@@ -80,7 +80,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailFooter(): string
     {
-        return __('notification::invoice.created.mail_footer', [], 'Thank you for your business!');
+        return __('delivery::completed.mail_footer');
     }
 
     /**
@@ -88,7 +88,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailSalutation(): ?string
     {
-        return __('notification::invoice.created.mail_salutation', [], 'Best regards, The Team');
+        return __('delivery::completed.mail_salutation');
     }
 
     /**
@@ -120,7 +120,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getDatabaseTitle(): string
     {
-        return __('notification::invoice.created.database_title', [], 'Invoice Generated');
+        return __('delivery::completed.database_title');
     }
 
     /**
@@ -136,7 +136,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getDatabaseUrl(): string
     {
-        return url('/invoices/' . $this->invoice->id);
+        return url('/delivery/' . $this->delivery->id);
     }
 
     /**
@@ -152,6 +152,6 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getCategory(): string
     {
-        return __('notification::invoice.created.category', [], 'Payment');
+        return __('delivery::completed.category');
     }
 }

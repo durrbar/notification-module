@@ -16,14 +16,14 @@ class DeliveryScheduledListener
 
     public function handle(DeliveryScheduledEvent $event)
     {
-        $order = $event->order;
-        $user = $order->customer;
+        $delivery = $event->delivery;
+        $user = $delivery->order->customer;
 
         // Send notification about the scheduled delivery
         $this->notificationService->sendNotification(
             $user,
             DeliveryScheduledNotification::class,
-            $order
+            $delivery
         );
     }
 }

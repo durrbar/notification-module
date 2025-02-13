@@ -2,11 +2,11 @@
 
 namespace Modules\Notification\Listeners;
 
-use Modules\Invoice\Events\InvoiceCreatedEvent;
-use Modules\Notification\Notifications\InvoiceCreatedNotification;
+use Modules\Invoice\Events\InvoicePaidEvent;
+use Modules\Notification\Notifications\InvoicePaidNotification;
 use Modules\Notification\Services\NotificationService;
 
-class InvoiceCreatedListener
+class InvoicePaidListener
 {
     protected NotificationService $notificationService;
 
@@ -15,7 +15,10 @@ class InvoiceCreatedListener
         $this->notificationService = $notificationService;
     }
 
-    public function handle(InvoiceCreatedEvent $event)
+    /**
+     * Handle the event.
+     */
+    public function handle(InvoicePaidEvent $event): void
     {
         $invoice = $event->invoice;
         $user = $invoice->order->customer;
@@ -23,7 +26,7 @@ class InvoiceCreatedListener
         // Send notification about the generated invoice
         $this->notificationService->sendNotification(
             $user,
-            InvoiceCreatedNotification::class,
+            InvoicePaidNotification::class,
             $invoice
         );
     }

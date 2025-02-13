@@ -2,27 +2,24 @@
 
 namespace Modules\Notification\Notifications;
 
+use Modules\Delivery\Models\Delivery;
 use Modules\Notification\Notifications\BaseNotification;
-use Modules\Order\Models\Order;
 
 class DeliveryScheduledNotification extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'delivery';
 
-    protected $order; // Explicitly define the order property for clarity
+    protected Delivery $delivery;
+    protected $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($data, $preferences)
+    public function __construct(Delivery $delivery, $user)
     {
-        // Cast $data to an Order object for clarity and type safety
-        if (!$data instanceof Order) {
-            throw new \InvalidArgumentException('The data must be an instance of Order.');
-        }
+        $this->delivery = $delivery;
 
-        $this->order = $data; // Store the order explicitly
-        parent::__construct($data, $preferences); // Pass $data to the parent class
+        parent::__construct($delivery, $user);
     }
 
     /**
@@ -30,7 +27,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailSubject(): string
     {
-        return 'Your Delivery Has Been Scheduled';
+        return __('delivery::scheduled.subject');
     }
 
     /**
@@ -38,7 +35,18 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailGreeting(): ?string
     {
-        return "Hello {$this->order->customer->name},";
+        return __('delivery::scheduled.mail_greeting', ['name' => $this->user->name]);
+    }
+
+    /**
+     * Generate the message text for database, mail, and SMS.
+     */
+    protected function getMessageText(): string
+    {
+        return __('delivery::scheduled.message', [
+            'order' => $this->delivery->order->order_number,
+            'delivery' => $this->delivery->delivery_number,
+        ]);
     }
 
     /**
@@ -46,7 +54,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailContent(): string
     {
-        return "Your order #{$this->order->id} has been scheduled for delivery.";
+        return $this->getMessageText();
     }
 
     /**
@@ -54,7 +62,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailActionText(): string
     {
-        return 'View Order Details';
+        return __('delivery::scheduled.view_order_details');
     }
 
     /**
@@ -62,7 +70,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailActionUrl(): string
     {
-        return url('/orders/' . $this->order->id);
+        return url('/delivery/' . $this->delivery->id);
     }
 
     /**
@@ -70,7 +78,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailFooter(): string
     {
-        return 'Thank you for shopping with us!';
+        return __('delivery::scheduled.mail_footer');
     }
 
     /**
@@ -78,7 +86,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getMailSalutation(): ?string
     {
-        return 'Best regards, The Team';
+        return __('delivery::scheduled.mail_salutation');
     }
 
     /**
@@ -102,7 +110,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getSmsMessage(): string
     {
-        return "Your delivery for order #{$this->order->id} has been scheduled.";
+        return $this->getMessageText();
     }
 
     /**
@@ -110,7 +118,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getDatabaseTitle(): string
     {
-        return 'Delivery Scheduled';
+        return __('delivery::scheduled.database_title');
     }
 
     /**
@@ -118,7 +126,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getDatabaseMessage(): string
     {
-        return "Your order #{$this->order->id} has been scheduled for delivery.";
+        return $this->getMessageText();
     }
 
     /**
@@ -126,7 +134,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getDatabaseUrl(): string
     {
-        return url('/orders/' . $this->order->id);
+        return url('/delivery/' . $this->delivery->id);
     }
 
     /**
@@ -134,7 +142,7 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getAvatarUrl(): ?string
     {
-        return $this->order->customer->avatar_url ?? null; // Example: Fetch avatar URL from the customer model
+        return $this->user->avatar_url ?? null;
     }
 
     /**
@@ -142,6 +150,6 @@ class DeliveryScheduledNotification extends BaseNotification
      */
     protected function getCategory(): string
     {
-        return 'Order'; // Example: Category for this type of notification
+        return __('delivery::scheduled.category');
     }
 }

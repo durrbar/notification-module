@@ -5,7 +5,7 @@ namespace Modules\Notification\Notifications;
 use Modules\Invoice\Models\Invoice;
 use Modules\Notification\Notifications\BaseNotification;
 
-class InvoiceCreatedNotification extends BaseNotification
+class InvoicePaidNotification extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'invoice';
 
@@ -27,7 +27,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailSubject(): string
     {
-        return __('notification::invoice.created.subject', [], 'Your Invoice Has Been Generated');
+        return __('notification::invoice.paid.subject', [], 'Your Invoice Has Been Paid');
     }
 
     /**
@@ -35,7 +35,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailGreeting(): ?string
     {
-        return __('notification::invoice.created.mail_greeting', [
+        return __('notification::invoice.paid.mail_greeting', [
             'name' => $this->user->name,
         ]) ?? 'Hello,';
     }
@@ -45,7 +45,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMessageText(): string
     {
-        return __('notification::invoice.created.message', [
+        return __('notification::invoice.paid.message', [
             'invoice' => $this->invoice->invoice_number,
             'order' => $this->invoice->order->order_number,
         ]);
@@ -64,7 +64,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailActionText(): string
     {
-        return __('notification::invoice.created.view_invoice', [], 'View Invoice');
+        return __('notification::invoice.paid.view_invoice', [], 'View Invoice');
     }
 
     /**
@@ -80,7 +80,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailFooter(): string
     {
-        return __('notification::invoice.created.mail_footer', [], 'Thank you for your business!');
+        return __('notification::invoice.paid.mail_footer', [], 'Thank you for your business!');
     }
 
     /**
@@ -88,7 +88,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getMailSalutation(): ?string
     {
-        return __('notification::invoice.created.mail_salutation', [], 'Best regards, The Team');
+        return __('notification::invoice.paid.mail_salutation', [], 'Best regards, The Team');
     }
 
     /**
@@ -120,7 +120,7 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getDatabaseTitle(): string
     {
-        return __('notification::invoice.created.database_title', [], 'Invoice Generated');
+        return __('notification::invoice.paid.database_title', [], 'Invoice Paid');
     }
 
     /**
@@ -152,6 +152,6 @@ class InvoiceCreatedNotification extends BaseNotification
      */
     protected function getCategory(): string
     {
-        return __('notification::invoice.created.category', [], 'Payment');
+        return __('notification::invoice.paid.category', [], 'Payment');
     }
 }

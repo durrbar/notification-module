@@ -4,10 +4,10 @@ namespace Modules\Notification\Notifications;
 
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
@@ -368,4 +368,6 @@ abstract class BaseNotification extends Notification implements ShouldQueue
      * @return string
      */
     abstract protected function getSmsMessage(): string;
+
+    abstract protected function getMessageText(): string;
 }
