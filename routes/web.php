@@ -14,6 +14,6 @@ use Modules\Notification\Http\Controllers\NotificationController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('notification', NotificationController::class)->names('notification');
-});
+// Route::group([], function () {
+//     Route::resource('notification', NotificationController::class)->names('notification');
+// });
