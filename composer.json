@@ -10,6 +10,10 @@
     ],
     "homepage": "https://github.com/durrbar/notification-module",
     "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/reverb": "^1.0"
+    },
     "extra": {
         "laravel": {
             "providers": [],
