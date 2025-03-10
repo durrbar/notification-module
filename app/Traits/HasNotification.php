@@ -2,6 +2,7 @@
 
 namespace Modules\Notification\Traits;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Notification\Models\UserNotificationPreference;
 
 trait HasNotification
@@ -11,7 +12,7 @@ trait HasNotification
      *
      * @return HasMany
      */
-    public function notificationPreferences()
+    public function notificationPreferences(): HasMany
     {
         return $this->hasMany(UserNotificationPreference::class);
     }
@@ -22,7 +23,7 @@ trait HasNotification
      * @param string $notificationType
      * @return \Modules\Notification\Models\UserNotificationPreference|null
      */
-    public function getNotificationPreference(string $notificationType)
+    public function getNotificationPreference(string $notificationType): ?UserNotificationPreference
     {
         return $this->notificationPreferences()->where('notification_type', $notificationType)->first();
     }
