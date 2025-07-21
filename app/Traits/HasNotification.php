@@ -9,8 +9,6 @@ trait HasNotification
 {
     /**
      * Get the user's notification preferences.
-     *
-     * @return HasMany
      */
     public function notificationPreferences(): HasMany
     {
@@ -19,9 +17,6 @@ trait HasNotification
 
     /**
      * Get the user's preference for a specific notification type.
-     *
-     * @param string $notificationType
-     * @return \Modules\Notification\Models\UserNotificationPreference|null
      */
     public function getNotificationPreference(string $notificationType): ?UserNotificationPreference
     {

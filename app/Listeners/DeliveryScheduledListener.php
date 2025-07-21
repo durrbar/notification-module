@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Notification\Listeners;
 
 use Modules\Delivery\Events\DeliveryScheduledEvent;

@@ -14,8 +14,8 @@ use Modules\Notification\Http\Controllers\NotificationController;
  *
 */
 
-Route::middleware(['auth:sanctum'])->prefix('v1/user')->group(function () {
-    Route::controller(NotificationController::class)->prefix('notifications')->group(function () {
+Route::middleware(['auth:sanctum'])->prefix('v1/user')->group(function (): void {
+    Route::controller(NotificationController::class)->prefix('notifications')->group(function (): void {
         Route::patch('mark-all-as-read', 'markAllAsRead');
         Route::delete('delete-all', 'deleteAll');
     });

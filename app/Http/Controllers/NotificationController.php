@@ -28,7 +28,7 @@ class NotificationController extends Controller
     {
         $notification = $request->user()->notifications()->find($id);
 
-        if (!$notification) {
+        if (! $notification) {
             return $this->respondNotFound('Notification not found.');
         }
 
@@ -50,7 +50,7 @@ class NotificationController extends Controller
 
         $notification = $request->user()->notifications()->find($id);
 
-        if (!$notification) {
+        if (! $notification) {
             return $this->respondNotFound('Notification not found.');
         }
 
@@ -68,7 +68,7 @@ class NotificationController extends Controller
     {
         $notification = $request->user()->notifications()->find($id);
 
-        if (!$notification) {
+        if (! $notification) {
             return $this->respondNotFound('Notification not found.');
         }
 

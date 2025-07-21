@@ -10,15 +10,15 @@ class NotificationService
     /**
      * Send a notification to the user.
      *
-     * @param mixed $user
-     * @param string $notificationClass
-     * @param mixed $data
+     * @param  mixed  $user
+     * @param  mixed  $data
      * @return void
      */
     public function sendNotification($user, string $notificationClass, $data = null)
     {
-        if (!$user) {
+        if (! $user) {
             Log::error('User is null in sendNotification.');
+
             return;
         }
 

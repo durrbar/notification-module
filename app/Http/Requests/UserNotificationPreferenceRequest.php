@@ -12,7 +12,11 @@ class UserNotificationPreferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'type' => 'required|string|max:255',
+            'database' => 'sometimes|boolean',
+            'email' => 'sometimes|boolean',
+            'sms' => 'sometimes|boolean',
+            'broadcast' => 'sometimes|boolean',
         ];
     }
 
@@ -22,5 +26,10 @@ class UserNotificationPreferenceRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function validated($key = null, $default = null): array
+    {
+        return array_merge(parent::validated(), ['user_id' => $this->user()->id]);
     }
 }

@@ -3,8 +3,8 @@
 namespace Modules\Notification\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\User\Models\User;
 
 // use Modules\Notification\Database\Factories\UserNotificationPreferenceFactory;
@@ -20,9 +20,10 @@ class UserNotificationPreference extends Model
     protected $fillable = [
         'user_id',
         'type',
+        'database',
         'email',
         'sms',
-        'broadcast'
+        'broadcast',
     ];
 
     // protected static function newFactory(): UserNotificationPreferenceFactory
@@ -39,5 +40,4 @@ class UserNotificationPreference extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }
