@@ -18,7 +18,7 @@ class NotificationResource extends JsonResource
             'title' => $this->data['title'],
             'category' => $this->data['category'],
             'isUnRead' => is_null($this->read_at),
-            'avatarUrl' => $this->data['avatarUrl'] | null,
+            'avatarUrl' => $this->data['avatarUrl'] || null,
             'createdAt' => $this->data['createdAt'],
         ];
     }

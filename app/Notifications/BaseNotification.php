@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Notification\Traits\BaseNotificationTrait;
 
-abstract class BaseNotification extends Notification implements NotificationContract, ShouldQueue
+abstract class BaseNotification extends Notification implements ShouldQueue, NotificationContract
 {
     use BaseNotificationTrait;
     use Queueable;
@@ -19,7 +19,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
     /**
      * Default queue name for this notification.
      */
-    public string $queue = 'notifications';
+    // public string $queue = 'notifications';
 
     /**
      * Create a new notification instance.
@@ -52,17 +52,17 @@ abstract class BaseNotification extends Notification implements NotificationCont
     /**
      * Set dynamic queue names for each notification channel.
      */
-    public function viaQueues(): array
-    {
-        $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
+    // public function viaQueues(): array
+    // {
+    //     $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
 
-        return [
-            'mail' => "notifications.{$type}.mail",
-            'database' => "notifications.{$type}.database",
-            'broadcast' => "notifications.{$type}.broadcast",
-            'nexmo' => "notifications.{$type}.sms",
-        ];
-    }
+    //     return [
+    //         'mail' => "notifications.{$type}.mail",
+    //         'database' => "notifications.{$type}.database",
+    //         'broadcast' => "notifications.{$type}.broadcast",
+    //         'nexmo' => "notifications.{$type}.sms",
+    //     ];
+    // }
 
     /**
      * Get the mail representation of the notification.

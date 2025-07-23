@@ -46,7 +46,7 @@ trait BaseNotificationTrait
      */
     protected function getPreferences($user): object
     {
-        return Cache::remember("user_{$user->id}_preferences_".static::NOTIFICATION_TYPE, 3600, function () use ($user) {
+        return Cache::flexible("user_{$user->id}_preferences_".static::NOTIFICATION_TYPE, [3540, 3600], function () use ($user) {
             return $user->notificationPreferences()->firstOrCreate(
                 ['type' => static::NOTIFICATION_TYPE],
                 [
