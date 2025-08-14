@@ -18,6 +18,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         parent::boot();
+        
+        $this->mapBroadcastRoutes();
     }
 
     /**
@@ -27,7 +29,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
         $this->mapWebRoutes();
-        $this->mapBroadcastRoutes();
     }
 
     /**
@@ -59,9 +60,8 @@ class RouteServiceProvider extends ServiceProvider
         Broadcast::routes(['prefix' => 'api/v1', 'middleware' => ['api', 'auth:sanctum']]);
 
         // Load the channels file if it exists
-        $channelsPath = module_path($this->name, '/routes/channels.php');
-        if (file_exists($channelsPath)) {
-            require $channelsPath;
+        if (file_exists($path = module_path($this->name, '/routes/channels.php'))) {
+            require $path;
         }
     }
 }

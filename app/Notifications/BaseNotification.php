@@ -130,7 +130,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
      */
     public function broadcastOn(): array
     {
-        return [new PrivateChannel('notifications.'.$this->user->id)];
+        return [new PrivateChannel('notifications.' . $this->user->id)];
     }
 
     /**
