@@ -49,9 +49,11 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
         return $this->resolveChannels();
     }
 
-    /**
-     * Set dynamic queue names for each notification channel.
-     */
+    // /**
+    //  * Set dynamic queue names for each notification channel.
+    //  * 
+    //  * @return array<string, string>
+    //  */
     // public function viaQueues(): array
     // {
     //     $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
@@ -60,7 +62,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     //         'mail' => "notifications.{$type}.mail",
     //         'database' => "notifications.{$type}.database",
     //         'broadcast' => "notifications.{$type}.broadcast",
-    //         'nexmo' => "notifications.{$type}.sms",
+    //         'sms' => "notifications.{$type}.sms",
     //     ];
     // }
 
@@ -90,7 +92,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     /**
      * Get the SMS representation of the notification.
      */
-    public function toNexmo($notifiable)
+    public function toSms($notifiable)
     {
         // Example implementation (commented out):
         // return (new \Illuminate\Notifications\Messages\NexmoMessage)

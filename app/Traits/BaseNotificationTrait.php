@@ -66,7 +66,7 @@ trait BaseNotificationTrait
     {
         $channels = array_filter([
             $this->isEmailChannelEnabled() ? 'mail' : null,
-            $this->isSmsChannelEnabled() ? 'nexmo' : null,
+            $this->isSmsChannelEnabled() ? 'sms' : null,
             $this->isDatabaseChannelEnabled() ? 'database' : null,
             $this->isBroadcastChannelEnabled() ? 'broadcast' : null,
         ]);
