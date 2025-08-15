@@ -73,11 +73,6 @@ class TestNotification extends BaseNotification
             'name' => $this->user->name,
         ]))
             ->line($this->getMessageText())
-            ->line(
-                __('delivery.completed.mail_greeting', [
-            'name' => $this->user->name,
-        ])
-            )
             ->action(
                 __('notification::delivery.completed.view_order_details'),
                 url('/delivery/')

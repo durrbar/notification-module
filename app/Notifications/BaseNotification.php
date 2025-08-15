@@ -64,11 +64,6 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     //     ];
     // }
 
-    public function locale($locale)
-    {
-        return $this->user->locale ?? app()->getLocale();
-    }
-
     /**
      * Get the mail representation of the notification.
      *
