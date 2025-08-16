@@ -3,8 +3,8 @@
 namespace Modules\Notification\Notifications;
 
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -49,22 +49,30 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
         return $this->resolveChannels();
     }
 
-    // /**
-    //  * Set dynamic queue names for each notification channel.
-    //  * 
-    //  * @return array<string, string>
-    //  */
-    // public function viaQueues(): array
+    /**
+     * Set dynamic queue names for each notification channel.
+     * 
+     * @return array<string, string>
+     */
+    // public function viaQueues(): ?array
     // {
+    //     if (!config('notification.dynamic_queue_enabled')) {
+    //         \Log::info('🔕 viaQueues disabled by config');
+    //         return null; // Fallback to default queue
+    //     }
+
     //     $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
 
-    //     return [
-    //         'mail' => "notifications.{$type}.mail",
-    //         'database' => "notifications.{$type}.database",
-    //         'broadcast' => "notifications.{$type}.broadcast",
-    //         'sms' => "notifications.{$type}.sms",
+    //     $queues = [
+    //         'mail' => "notifications-{$type}-mail",
+    //         'database' => "notifications-{$type}-database",
+    //         'broadcast' => "notifications-{$type}-broadcast",
+    //         'sms' => "notifications-{$type}-sms",
     //     ];
+
+    //     return $queues;
     // }
+
 
     /**
      * Get the mail representation of the notification.
@@ -116,7 +124,10 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
      */
     public function toBroadcast($notifiable): BroadcastMessage
     {
-        return new BroadcastMessage($this->notificationPayload());
+        // $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
+
+        return (new BroadcastMessage($this->notificationPayload()));
+        // ->onQueue("notifications-{$type}-broadcast");
     }
 
     /**

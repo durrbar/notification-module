@@ -23,12 +23,7 @@ class NotificationService
             return;
         }
 
-        logger()->info('Locale used in mail:', [
-            'app_locale' => app()->getLocale(),
-            'user_locale' => $user->locale,
-        ]);
-
         // Send the notification
-        $user->notify(new $notificationClass($data, $user));
+        Notification::send($user, new $notificationClass($data, $user));
     }
 }
