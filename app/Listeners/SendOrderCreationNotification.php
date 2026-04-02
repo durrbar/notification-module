@@ -24,7 +24,7 @@ class SendOrderCreationNotification implements ShouldQueue
     {
         $order = $event->order;
         $customer = $event->order->customer;
-        $emailReceiver = $this->getWhichUserWillGetEmail(EventType::ORDER_CREATED, $order->language);
+        $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCreated->value, $order->language);
         if ($customer && $emailReceiver['customer'] && $order->parent_id == null) {
             $customer->notify(new OrderPlacedSuccessfully($event->invoiceData));
         }

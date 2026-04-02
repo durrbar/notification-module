@@ -1,35 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Enums;
 
-use BenSampo\Enum\Enum;
-
-/**
- * Class RoleType
- */
-final class EventType extends Enum
+enum EventType: string
 {
-    public const ORDER_CANCELLED = 'cancelOrder';
-
-    public const ORDER_CREATED = 'createOrder';
-
-    public const ORDER_DELIVERED = 'deliverOrder';
-
-    public const ORDER_PAYMENT = 'paymentOrder';
-
-    public const ORDER_PAYMENT_FAILED = 'paymentFailedOrder';
-
-    public const ORDER_PAYMENT_SUCCESS = 'paymentSuccessOrder';
-
-    public const ORDER_REFUND = 'refundOrder';
-
-    public const ORDER_STATUS_CHANGED = 'statusChangeOrder';
-
-    public const ORDER_UPDATED = 'updateOrder';
-
-    public const QUESTION_ANSWERED = 'answerQuestion';
-
-    public const QUESTION_CREATED = 'createQuestion';
-
-    public const REVIEW_CREATED = 'createReview';
-}
+    case OrderCancelled = 'cancelOrder';
+    case OrderCreated = 'createOrder';
+    case OrderDelivered = 'deliverOrder';
+    case OrderPayment = 'paymentOrder';
+    case OrderPaymentFailed = 'paymentFailedOrder';
+    case OrderPaymentSuccess = 'paymentSuccessOrder';
+    case OrderRefund = 'refundOrder';
+    case OrderStatusChanged = 'statusChangeOrder';
+    case OrderUpdated = 'updateOrder';
+    case QuestionAnswered = 'answerQuestion';
+    case QuestionCreated = 'createQuestion';
+    case ReviewCreated = 'createReview';}

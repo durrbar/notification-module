@@ -22,7 +22,7 @@ class SendPaymentSuccessNotification implements ShouldQueue
      */
     public function handle(PaymentSuccess $event)
     {
-        $emailReceiver = $this->getWhichUserWillGetEmail(EventType::ORDER_PAYMENT_SUCCESS, $event->order->language ?? DEFAULT_LANGUAGE);
+        $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderPaymentSuccess->value, $event->order->language ?? DEFAULT_LANGUAGE);
         if ($emailReceiver['vendor']) {
             foreach ($event->order->children as $child_order) {
                 $vendor_id = $child_order->shop->owner_id;

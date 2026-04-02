@@ -18,7 +18,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_CANCELLED,
+            'smsEventName' => EventType::OrderCancelled->value,
             'adminMessage' => __('notification::sms.order.cancelOrder.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number, 'customer_name' => $customerName]),
             'customerMessage' => __('notification::sms.order.cancelOrder.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number, 'customer_name' => $customerName]),
             'storeOwnerMessage' => __('notification::sms.order.cancelOrder.storeOwner.message'),
@@ -33,7 +33,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_CREATED,
+            'smsEventName' => EventType::OrderCreated->value,
             'adminMessage' => __('notification::sms.order.orderCreated.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'customerMessage' => __('notification::sms.order.orderCreated.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'storeOwnerMessage' => __('notification::sms.order.orderCreated.storeOwner.message'),
@@ -48,7 +48,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_PAYMENT_SUCCESS,
+            'smsEventName' => EventType::OrderPaymentSuccess->value,
             'adminMessage' => __('notification::sms.order.paymentSuccessOrder.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'customerMessage' => __('notification::sms.order.paymentSuccessOrder.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'storeOwnerMessage' => __('notification::sms.order.paymentSuccessOrder.storeOwner.message'),
@@ -64,7 +64,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_STATUS_CHANGED,
+            'smsEventName' => EventType::OrderStatusChanged->value,
             'adminMessage' => __('notification::sms.order.statusChangeOrder.admin.message', [
                 'ORDER_TRACKING_NUMBER' => $order->tracking_number,
                 'order_status' => $status,
@@ -85,7 +85,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_DELIVERED,
+            'smsEventName' => EventType::OrderDelivered->value,
             'adminMessage' => __('notification::sms.order.deliverOrder.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'customerMessage' => __('notification::sms.order.deliverOrder.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'storeOwnerMessage' => __('notification::sms.order.deliverOrder.storeOwner.message'),
@@ -100,7 +100,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_PAYMENT_FAILED,
+            'smsEventName' => EventType::OrderPaymentFailed->value,
             'adminMessage' => __('notification::sms.order.paymentFailedOrder.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'customerMessage' => __('notification::sms.order.paymentFailedOrder.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'storeOwnerMessage' => __('notification::sms.order.paymentFailedOrder.storeOwner.message'),
@@ -128,7 +128,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_REFUND,
+            'smsEventName' => EventType::OrderRefund->value,
             'adminMessage' => __('notification::sms.order.refundRequested.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
             'customerMessage' => __('notification::sms.order.refundRequested.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number]),
         ];
@@ -143,7 +143,7 @@ trait OrderSmsTrait
         $smsArray = [
             'order' => $order,
             'language' => $order->language ?? DEFAULT_LANGUAGE,
-            'smsEventName' => EventType::ORDER_REFUND,
+            'smsEventName' => EventType::OrderRefund->value,
             'adminMessage' => __('notification::sms.order.refundUpdated.admin.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number, ':refund_status' => $refund->status]),
             'customerMessage' => __('notification::sms.order.refundUpdated.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number, ':refund_status' => $refund->status]),
         ];

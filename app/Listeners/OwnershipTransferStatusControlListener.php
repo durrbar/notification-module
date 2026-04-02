@@ -4,6 +4,8 @@ namespace Modules\Notification\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Notification;
+use Modules\Ecommerce\Enums\DefaultStatusType;
+use Modules\Ecommerce\Enums\ProductStatus;
 use Modules\Ecommerce\Models\Product;
 use Modules\Ecommerce\Models\Shop;
 use Modules\Notification\Notifications\TransferredShopOwnershipStatus;
@@ -23,15 +25,15 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
     public function handle(OwnershipTransferStatusControl $event)
     {
         switch ($event->ownershipTransfer->status) {
-            case 'processing':
+            case DefaultStatusType::Processing->value:
                 $this->processingOwnerShipTransferStatus($event->ownershipTransfer);
                 break;
 
-            case 'approved':
+            case DefaultStatusType::Approved->value:
                 $this->approvedOwnerShipTransferStatus($event->ownershipTransfer);
                 break;
 
-            case 'rejected':
+            case DefaultStatusType::Rejected->value:
                 $this->rejectingOwnerShipTransferStatus($event->ownershipTransfer);
                 break;
         }
@@ -45,7 +47,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         $shop->save();
         $shop->refresh();
         // draft products
-        Product::where('shop_id', '=', $ownershipRequest->shop_id)->update(['status' => 'draft']);
+        Product::where('shop_id', '=', $ownershipRequest->shop_id)->update(['status' => ProductStatus::Draft->value]);
 
         $message = [
             'message' => 'Shop transfer request #'.$ownershipRequest->transaction_identifier.' is on processing.',
@@ -72,7 +74,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         $shop->is_active = false;
         $shop->save();
         // draft products
-        Product::where('shop_id', '=', $ownershipRequest->shop_id)->update(['status' => 'draft']);
+        Product::where('shop_id', '=', $ownershipRequest->shop_id)->update(['status' => ProductStatus::Draft->value]);
         $message = [
             'message' => 'Sorry! Shop transfer request #'.$ownershipRequest->transaction_identifier.' is rejected. For more details please contact with site admin.',
         ];

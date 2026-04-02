@@ -128,7 +128,7 @@ trait SmsTrait
      */
     public function adminList(): Collection
     {
-        return User::permission(Permission::SUPER_ADMIN)->get();
+        return User::permission(Permission::SuperAdmin->value)->get();
     }
 
     public function getWhichUserWillGetEmail($emailEventName, $language): array
@@ -139,13 +139,13 @@ trait SmsTrait
     public function getWhichUserWillGetEventSmsOrEmail(string $eventName, string $eventType, string $language): array
     {
         $orderStatusChangeArray = [
-            EventType::ORDER_CANCELLED, EventType::ORDER_DELIVERED, EventType::ORDER_CREATED, EventType::ORDER_STATUS_CHANGED,
+            EventType::OrderCancelled->value, EventType::OrderDelivered->value, EventType::OrderCreated->value, EventType::OrderStatusChanged->value,
         ];
         if (in_array($eventName, $orderStatusChangeArray)) {
-            $eventName = EventType::ORDER_STATUS_CHANGED;
+            $eventName = EventType::OrderStatusChanged->value;
         }
-        if (in_array($eventName, [EventType::ORDER_PAYMENT_FAILED, EventType::ORDER_PAYMENT_SUCCESS])) {
-            $eventName = EventType::ORDER_PAYMENT;
+        if (in_array($eventName, [EventType::OrderPaymentFailed->value, EventType::OrderPaymentSuccess->value])) {
+            $eventName = EventType::OrderPayment->value;
         }
         $userArray = ['customer' => false, 'admin' => false, 'vendor' => false];
         $settings = Settings::getData($language);

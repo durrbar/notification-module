@@ -29,7 +29,7 @@ class StoreNoticeListener implements ShouldQueue
     public function handle(StoreNoticeEvent $event)
     {
         $users = User::whereHas('permissions', function (Builder $query): void {
-            $query->whereIn('name', [Permission::SUPER_ADMIN]);
+            $query->whereIn('name', [Permission::SuperAdmin->value]);
         })->get();
 
         if (! empty($users)) {

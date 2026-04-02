@@ -7,7 +7,7 @@ use Modules\Invoice\Models\Invoice;
 
 class InvoicePaidNotification extends BaseNotification
 {
-    public const NOTIFICATION_TYPE = 'invoice';
+    public const string NOTIFICATION_TYPE = 'invoice';
 
     protected Invoice $invoice;
 
