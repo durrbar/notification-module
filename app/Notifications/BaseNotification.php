@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Notifications;
 
 use Illuminate\Broadcasting\PrivateChannel;
@@ -11,7 +13,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Str;
 use Modules\Notification\Traits\BaseNotificationTrait;
 
-abstract class BaseNotification extends Notification implements ShouldQueue, NotificationContract
+abstract class BaseNotification extends Notification implements NotificationContract, ShouldQueue
 {
     use BaseNotificationTrait;
     use Queueable;
@@ -44,14 +46,14 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
      *
      * @param  mixed  $notifiable
      */
-    public function via($notifiable): array
+    final public function via($notifiable): array
     {
         return $this->resolveChannels();
     }
 
     /**
      * Set dynamic queue names for each notification channel.
-     * 
+     *
      * @return array<string, string>
      */
     // public function viaQueues(): ?array
@@ -73,13 +75,12 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     //     return $queues;
     // }
 
-
     /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
      */
-    public function toMail($notifiable): MailMessage
+    final public function toMail($notifiable): MailMessage
     {
         $mail = new MailMessage();
 
@@ -100,7 +101,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     /**
      * Get the SMS representation of the notification.
      */
-    public function toSms($notifiable)
+    final public function toSms($notifiable)
     {
         // Example implementation (commented out):
         // return (new \Illuminate\Notifications\Messages\NexmoMessage)
@@ -112,7 +113,7 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
      *
      * @param  mixed  $notifiable
      */
-    public function toDatabase($notifiable): array
+    final public function toDatabase($notifiable): array
     {
         return $this->notificationPayload();
     }
@@ -122,18 +123,18 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
      *
      * @param  mixed  $notifiable
      */
-    public function toBroadcast($notifiable): BroadcastMessage
+    final public function toBroadcast($notifiable): BroadcastMessage
     {
         // $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
 
-        return (new BroadcastMessage($this->notificationPayload()));
+        return new BroadcastMessage($this->notificationPayload());
         // ->onQueue("notifications-{$type}-broadcast");
     }
 
     /**
      * Customize the data payload for the broadcast event.
      */
-    public function broadcastWith(): array
+    final public function broadcastWith(): array
     {
         return $this->notificationPayload();
     }
@@ -141,15 +142,15 @@ abstract class BaseNotification extends Notification implements ShouldQueue, Not
     /**
      * Define the private channel the notification should broadcast on.
      */
-    public function broadcastOn(): array
+    final public function broadcastOn(): array
     {
-        return [new PrivateChannel('notifications.' . $this->user->id)];
+        return [new PrivateChannel('notifications.'.$this->user->id)];
     }
 
     /**
      * Customize the broadcast event name.
      */
-    public function broadcastAs(): string
+    final public function broadcastAs(): string
     {
         return 'new-notification';
     }

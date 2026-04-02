@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,7 +30,7 @@ class SendOrderStatusChangedNotification implements ShouldQueue
 
         $this->sendOrderStatusChangeSms($order);
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderStatusChanged->value, $order->language ?? DEFAULT_LANGUAGE);
-        if ($emailReceiver['vendor'] && $order->parent_id != null) {
+        if ($emailReceiver['vendor'] && $order->parent_id !== null) {
             $vendor_id = $order->shop->owner_id;
             $vendor = User::find($vendor_id);
 
@@ -36,7 +38,7 @@ class SendOrderStatusChangedNotification implements ShouldQueue
                 $vendor->notify(new OrderStatusChangedNotification($event->order));
             }
         }
-        if ($emailReceiver['customer'] && $order->parent_id == null) {
+        if ($emailReceiver['customer'] && $order->parent_id === null) {
             $customer->notify(new OrderStatusChangedNotification($event->order));
         }
         if ($emailReceiver['admin']) {

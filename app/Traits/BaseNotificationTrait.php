@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Traits;
 
 use Illuminate\Notifications\Messages\MailMessage;
@@ -34,6 +36,19 @@ trait BaseNotificationTrait
      * Unique identifier for this notification instance.
      */
     protected string $notificationId;
+
+    /**
+     * Get the attachments for the mail message.
+     */
+    public function getMailAttachments(): array
+    {
+        return [];
+    }
+
+    /**
+     * Customize additional mail headers like from/replyTo.
+     */
+    public function getMailExtraHeader(MailMessage $mail): void {}
 
     /* ------------------------------------------------------------------------
      |  Protected Helper Methods
@@ -123,20 +138,5 @@ trait BaseNotificationTrait
             'url' => $this->getDatabaseUrl(),
             'user_id' => $this->user->id,
         ];
-    }
-
-    /**
-     * Get the attachments for the mail message.
-     */
-    public function getMailAttachments(): array
-    {
-        return [];
-    }
-
-    /**
-     * Customize additional mail headers like from/replyTo.
-     */
-    public function getMailExtraHeader(MailMessage $mail): void
-    {
     }
 }

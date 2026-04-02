@@ -17,4 +17,5 @@ enum EventType: string
     case OrderUpdated = 'updateOrder';
     case QuestionAnswered = 'answerQuestion';
     case QuestionCreated = 'createQuestion';
-    case ReviewCreated = 'createReview';}
+    case ReviewCreated = 'createReview';
+}

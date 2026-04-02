@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Traits;
 
 use Illuminate\Support\Facades\App;
@@ -108,18 +110,6 @@ trait OrderSmsTrait
         $this->sendSmsOnOrderEvent($smsArray, false);
     }
 
-    protected function getCustomerName($order)
-    {
-        $customerName = $order->customer;
-        if (! $customerName) {
-            $customerName = 'Guest Customer';
-        } else {
-            $customerName = $order->customer->name;
-        }
-
-        return $customerName;
-    }
-
     public function sendRefundRequestedSms($refund): void
     {
         $order = $refund->order;
@@ -148,5 +138,17 @@ trait OrderSmsTrait
             'customerMessage' => __('notification::sms.order.refundUpdated.customer.message', ['ORDER_TRACKING_NUMBER' => $order->tracking_number, ':refund_status' => $refund->status]),
         ];
         $this->sendSmsOnRefund($smsArray);
+    }
+
+    protected function getCustomerName($order)
+    {
+        $customerName = $order->customer;
+        if (! $customerName) {
+            $customerName = 'Guest Customer';
+        } else {
+            $customerName = $order->customer->name;
+        }
+
+        return $customerName;
     }
 }

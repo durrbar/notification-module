@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -7,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Modules\Ecommerce\Models\User;
+use Modules\Vendor\Models\Shop;
 
 class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
 {
@@ -23,7 +26,7 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param  \Modules\Vendor\Models\Shop  $shop
+     * @param  Shop  $shop
      * @param  User  $previousOwner
      * @param  User  $newOwner
      * @param  mixed  $optional
@@ -52,7 +55,7 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {

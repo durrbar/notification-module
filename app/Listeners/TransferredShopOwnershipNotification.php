@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -8,6 +10,7 @@ use Illuminate\Support\Facades\Notification;
 use Modules\Notification\Notifications\TransferredShopOwnership;
 use Modules\User\Traits\UsersTrait;
 use Modules\Vendor\Events\ProcessOwnershipTransition;
+use Throwable;
 
 class TransferredShopOwnershipNotification implements ShouldQueue
 {
@@ -47,7 +50,7 @@ class TransferredShopOwnershipNotification implements ShouldQueue
                     ));
                 }
             }
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             Log::error('Error from TransferredShopOwnershipNotification: '.$th->getMessage());
         }
     }

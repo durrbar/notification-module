@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Traits;
 
 use Exception;
@@ -20,11 +22,11 @@ trait SmsTrait
             $order = $smsArray['order'];
             $smsGateway = $this->getOtpGateway();
             $userType = $this->getWhichUserWillGetSms($smsArray['smsEventName'], $smsArray['language']);
-            if ($userType['customer'] == true) {
+            if ($userType['customer'] === true) {
                 $smsGateway->sendSms($order->customer_contact, $smsArray['customerMessage']);
             }
 
-            if ($userType['admin'] == true) {
+            if ($userType['admin'] === true) {
 
                 $adminList = $this->adminList();
 
@@ -52,7 +54,7 @@ trait SmsTrait
             $smsGateway = $this->getOtpGateway();
             $userType = $this->getWhichUserWillGetSms($smsArray['smsEventName'], $smsArray['language']);
 
-            if ($userType['customer'] && $order->parent_id == null) {
+            if ($userType['customer'] && $order->parent_id === null) {
                 $smsGateway->sendSms($order->customer_contact, $smsArray['customerMessage']);
                 /* $customer = $order->customer;
                  if ($customer && $customer->profile && $customer->profile->contact) {
@@ -72,7 +74,7 @@ trait SmsTrait
             }
             if ($userType['vendor']) {
                 $message = $smsArray['storeOwnerMessage'];
-                if ($order->parent_id == null) {
+                if ($order->parent_id === null) {
                     if (! $shouldSendToChildOrder) {
                         return;
                     }
@@ -98,19 +100,6 @@ trait SmsTrait
             // do nothing
             info('This exception info is from SmsTrait sendSmsOnOrderEvent method');
         }
-    }
-
-    /**
-     * Get OTP gateway
-     *
-     * @return OtpGateway
-     */
-    protected function getOtpGateway()
-    {
-        $gateway = config('auth.active_otp_gateway');
-        $gateWayClass = "Modules\Notification\\Otp\\Gateways\\".ucfirst($gateway).'Gateway';
-
-        return new OtpGateway(new $gateWayClass());
     }
 
     /**
@@ -161,5 +150,18 @@ trait SmsTrait
         // send a test email
 
         return $userArray;
+    }
+
+    /**
+     * Get OTP gateway
+     *
+     * @return OtpGateway
+     */
+    protected function getOtpGateway()
+    {
+        $gateway = config('auth.active_otp_gateway');
+        $gateWayClass = "Modules\Notification\\Otp\\Gateways\\".ucfirst($gateway).'Gateway';
+
+        return new OtpGateway(new $gateWayClass());
     }
 }

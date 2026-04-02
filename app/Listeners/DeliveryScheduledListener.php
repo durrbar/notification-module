@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Modules\Delivery\Events\DeliveryScheduledEvent;
@@ -8,7 +10,7 @@ use Modules\Notification\Services\NotificationService;
 
 class DeliveryScheduledListener
 {
-    protected NotificationService $notificationService;
+    private NotificationService $notificationService;
 
     public function __construct(NotificationService $notificationService)
     {

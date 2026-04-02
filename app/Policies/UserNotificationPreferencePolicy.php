@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Policies;
 
 use Modules\Notification\Models\UserNotificationPreference;

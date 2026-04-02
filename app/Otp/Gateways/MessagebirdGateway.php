@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Otp\Gateways;
 
 use Exception;
 use MessageBird\Client;
+use MessageBird\Objects\Message;
 use MessageBird\Objects\Verify;
 use Modules\Notification\Otp\OtpInterface;
 use Modules\Notification\Otp\Result;
@@ -59,7 +62,7 @@ class MessagebirdGateway implements OtpInterface
     public function sendSms($phone_number, $messageBody)
     {
         try {
-            $message = new \MessageBird\Objects\Message();
+            $message = new Message();
             $message->originator = config('services.messagebird.originator');
             $message->recipients = [$phone_number];
             $message->body = $message;

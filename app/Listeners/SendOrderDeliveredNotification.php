@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Exception;
@@ -26,7 +28,7 @@ class SendOrderDeliveredNotification implements ShouldQueue
 
         $order = $event->order;
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderDelivered->value, $order->language);
-        if ($emailReceiver['customer'] && $order->customer && $order->parent_id == null) {
+        if ($emailReceiver['customer'] && $order->customer && $order->parent_id === null) {
             $order->customer->notify(new OrderDeliveredNotification($order));
         }
         if ($emailReceiver['vendor']) {

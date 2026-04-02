@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -25,7 +27,7 @@ class SendOrderCreationNotification implements ShouldQueue
         $order = $event->order;
         $customer = $event->order->customer;
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCreated->value, $order->language);
-        if ($customer && $emailReceiver['customer'] && $order->parent_id == null) {
+        if ($customer && $emailReceiver['customer'] && $order->parent_id === null) {
             $customer->notify(new OrderPlacedSuccessfully($event->invoiceData));
         }
         if ($emailReceiver['admin']) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Modules\Delivery\Events\DeliveryCompletedEvent;
@@ -11,7 +13,7 @@ class DeliveryCompletedListener
     /**
      * Create the event listener.
      */
-    protected NotificationService $notificationService;
+    private NotificationService $notificationService;
 
     public function __construct(NotificationService $notificationService)
     {

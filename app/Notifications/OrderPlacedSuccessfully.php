@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Notifications;
 
 use Barryvdh\DomPDF\Facade\Pdf as PDF;

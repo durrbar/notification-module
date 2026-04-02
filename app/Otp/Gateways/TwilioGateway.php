@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Otp\Gateways;
 
 use Modules\Notification\Otp\OtpInterface;
 use Modules\Notification\Otp\Result;
+use Twilio\Exceptions\ConfigurationException;
 use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
 
@@ -22,7 +25,7 @@ class TwilioGateway implements OtpInterface
     /**
      * Verification constructor.
      *
-     * @throws \Twilio\Exceptions\ConfigurationException
+     * @throws ConfigurationException
      */
     public function __construct($client = null, ?string $verification_sid = null)
     {

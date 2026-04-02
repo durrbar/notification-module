@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Notifications;
 
 use Illuminate\Bus\Queueable;
@@ -54,7 +56,7 @@ class NewOrderReceived extends Notification implements ShouldQueue
         } else {
             $customer = $customer->name;
         }
-        if ($this->receiver == 'admin') {
+        if ($this->receiver === 'admin') {
             $subject = __('notification::sms.order.orderCreated.admin.subject');
             $url = config('shop.dashboard_url').'/orders/'.$this->order->id;
         } else {

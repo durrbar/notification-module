@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Services;
 
 use Illuminate\Support\Facades\Log;
@@ -11,8 +13,8 @@ class NotificationService
     /**
      * Send a notification to the user.
      *
-     * @param  mixed User $user 
-     * @param  mixed $data
+     * @param  mixed User $user
+     * @param  mixed  $data
      * @return void
      */
     public function sendNotification(User $user, string $notificationClass, $data = null)

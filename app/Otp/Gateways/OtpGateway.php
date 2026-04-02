@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Otp\Gateways;
 
 use Modules\Notification\Otp\OtpInterface;

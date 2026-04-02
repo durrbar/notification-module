@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Notification\Listeners;
 
 use Exception;
@@ -24,11 +26,11 @@ class SendOrderCancelledNotification implements ShouldQueue
     public function handle(OrderCancelled $event)
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCancelled->value, $event->order->language);
-        if ($emailReceiver['customer'] && $event->order->customer && $event->order->parent_id == null) {
+        if ($emailReceiver['customer'] && $event->order->customer && $event->order->parent_id === null) {
             $event->order->customer->notify(new OrderCancelledNotification($event->order));
         }
         if ($emailReceiver['vendor']) {
-            if ($event->order->parent_id == null) {
+            if ($event->order->parent_id === null) {
 
                 foreach ($event->order->children as $child_order) {
                     try {
