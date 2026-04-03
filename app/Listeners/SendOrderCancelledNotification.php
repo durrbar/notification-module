@@ -18,10 +18,6 @@ class SendOrderCancelledNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(OrderCancelled $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCancelled->value, $event->order->language);
@@ -30,7 +26,6 @@ class SendOrderCancelledNotification implements ShouldQueue
         }
         if ($emailReceiver['vendor']) {
             if ($event->order->parent_id === null) {
-
                 foreach ($event->order->children as $child_order) {
                     try {
                         $vendor_id = $child_order->shop->owner_id;
@@ -53,7 +48,6 @@ class SendOrderCancelledNotification implements ShouldQueue
         if ($emailReceiver['admin']) {
             $admins = $this->adminList();
             foreach ($admins as $admin) {
-
                 $admin->notify(new OrderCancelledNotification($event->order));
             }
         }

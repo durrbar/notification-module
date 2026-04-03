@@ -15,18 +15,13 @@ class SendReviewNotification implements ShouldQueue
 {
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(ReviewCreated $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::ReviewCreated->value, $event->review->language ?? DEFAULT_LANGUAGE);
         if ($emailReceiver['vendor']) {
-            $shop_id = $event->review->shop_id;
-            $shop = Shop::with('owner')->findOrFail($shop_id);
-            $shop_owner = $shop->owner;
-            $shop_owner->notify(new NewReviewCreated($event->review));
+            $shopId = $event->review->shop_id;
+            $shop = Shop::with('owner')->findOrFail($shopId);
+            $shop->owner->notify(new NewReviewCreated($event->review));
         }
     }
 }

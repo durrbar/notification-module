@@ -15,11 +15,9 @@ class InvoiceCreatedListener
     public function handle(InvoiceCreatedEvent $event): void
     {
         $invoice = $event->invoice;
-        $user = $invoice->order->customer;
 
-        // Send notification about the generated invoice
         $this->notificationService->sendNotification(
-            $user,
+            $invoice->order->customer,
             InvoiceCreatedNotification::class,
             $invoice
         );

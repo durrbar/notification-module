@@ -17,10 +17,6 @@ class SendPaymentSuccessNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(PaymentSuccess $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderPaymentSuccess->value, $event->order->language ?? DEFAULT_LANGUAGE);

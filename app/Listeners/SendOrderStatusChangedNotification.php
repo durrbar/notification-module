@@ -17,13 +17,8 @@ class SendOrderStatusChangedNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(OrderStatusChanged $event): void
     {
-
         $order = $event->order;
         $customer = $event->order->customer;
 

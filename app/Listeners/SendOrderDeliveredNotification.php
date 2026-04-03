@@ -18,13 +18,8 @@ class SendOrderDeliveredNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(OrderDelivered $event): void
     {
-
         $order = $event->order;
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderDelivered->value, $order->language);
         if ($emailReceiver['customer'] && $order->customer && $order->parent_id === null) {

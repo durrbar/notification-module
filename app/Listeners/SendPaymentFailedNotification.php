@@ -17,10 +17,6 @@ class SendPaymentFailedNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(PaymentFailed $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderPaymentFailed->value, $event->order->language ?? DEFAULT_LANGUAGE);

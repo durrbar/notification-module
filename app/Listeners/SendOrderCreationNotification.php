@@ -17,10 +17,6 @@ class SendOrderCreationNotification implements ShouldQueue
     use OrderSmsTrait;
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(OrderCreated $event): void
     {
         $order = $event->order;

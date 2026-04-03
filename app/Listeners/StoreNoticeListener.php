@@ -13,16 +13,13 @@ use Modules\Vendor\Events\StoreNoticeEvent;
 
 class StoreNoticeListener implements ShouldQueue
 {
-    /**
-     * Handle the event.
-     */
     public function handle(StoreNoticeEvent $event): void
     {
         $users = User::whereHas('permissions', function (Builder $query): void {
             $query->whereIn('name', [Permission::SuperAdmin->value]);
         })->get();
 
-        if (! empty($users)) {
+        if ($users->isNotEmpty()) {
             foreach ($users as $user) {
                 $user->notify(new StoreNoticeNotification($event->storeNotice, $event->action));
             }

@@ -12,17 +12,12 @@ class DeliveryCompletedListener
 {
     public function __construct(private readonly NotificationService $notificationService) {}
 
-    /**
-     * Handle the event.
-     */
     public function handle(DeliveryCompletedEvent $event): void
     {
         $delivery = $event->delivery;
-        $user = $delivery->order->customer;
 
-        // Send notification about the completed delivery
         $this->notificationService->sendNotification(
-            $user,
+            $delivery->order->customer,
             DeliveryCompleteNotification::class,
             $delivery
         );

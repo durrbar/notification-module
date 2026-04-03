@@ -12,17 +12,12 @@ class InvoicePaidListener
 {
     public function __construct(private readonly NotificationService $notificationService) {}
 
-    /**
-     * Handle the event.
-     */
     public function handle(InvoicePaidEvent $event): void
     {
         $invoice = $event->invoice;
-        $user = $invoice->order->customer;
 
-        // Send notification about the generated invoice
         $this->notificationService->sendNotification(
-            $user,
+            $invoice->order->customer,
             InvoicePaidNotification::class,
             $invoice
         );

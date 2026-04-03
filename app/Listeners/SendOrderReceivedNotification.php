@@ -14,10 +14,6 @@ class SendOrderReceivedNotification implements ShouldQueue
 {
     use SmsTrait;
 
-    /**
-     * Handle the event.
-     *
-     */
     public function handle(OrderReceived $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCreated->value, $event->order->language);
