@@ -10,12 +10,7 @@ use Modules\Notification\Services\NotificationService;
 
 class InvoiceCreatedListener
 {
-    private NotificationService $notificationService;
-
-    public function __construct(NotificationService $notificationService)
-    {
-        $this->notificationService = $notificationService;
-    }
+    public function __construct(private NotificationService $notificationService) {}
 
     public function handle(InvoiceCreatedEvent $event)
     {

@@ -10,15 +10,7 @@ use Modules\Notification\Services\NotificationService;
 
 class DeliveryCompletedListener
 {
-    /**
-     * Create the event listener.
-     */
-    private NotificationService $notificationService;
-
-    public function __construct(NotificationService $notificationService)
-    {
-        $this->notificationService = $notificationService;
-    }
+    public function __construct(private NotificationService $notificationService) {}
 
     /**
      * Handle the event.
