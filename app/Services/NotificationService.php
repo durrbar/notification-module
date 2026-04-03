@@ -15,7 +15,6 @@ class NotificationService
      *
      * @param  mixed User $user
      * @param  mixed  $data
-     * @return void
      */
     public function sendNotification(User $user, string $notificationClass, $data = null)
     {
