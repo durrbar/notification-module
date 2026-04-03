@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Notification;
 use Modules\Ecommerce\Enums\DefaultStatusType;
 use Modules\Ecommerce\Enums\ProductStatus;
 use Modules\Ecommerce\Models\Product;
-use Modules\Ecommerce\Models\Shop;
 use Modules\Notification\Notifications\TransferredShopOwnershipStatus;
 use Modules\User\Models\User;
 use Modules\User\Traits\UsersTrait;
 use Modules\Vendor\Events\OwnershipTransferStatusControl;
+use Modules\Vendor\Models\OwnershipTransfer;
+use Modules\Vendor\Models\Shop;
 
 class OwnershipTransferStatusControlListener implements ShouldQueue
 {
@@ -21,7 +22,6 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
 
     /**
      * Handle the event.
-     *
      */
     public function handle(OwnershipTransferStatusControl $event): void
     {
@@ -40,7 +40,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         }
     }
 
-    public function processingOwnerShipTransferStatus($ownershipRequest)
+    public function processingOwnerShipTransferStatus(OwnershipTransfer $ownershipRequest): void
     {
         // disable shop
         $shop = $ownershipRequest->shop;
@@ -56,7 +56,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         $this->notificationThrowingFunction($shop, $ownershipRequest, $message);
     }
 
-    public function approvedOwnerShipTransferStatus($ownershipRequest)
+    public function approvedOwnerShipTransferStatus(OwnershipTransfer $ownershipRequest): void
     {
         $shop = $ownershipRequest->shop;
         $shop->owner_id = $ownershipRequest->to;
@@ -68,7 +68,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         $this->notificationThrowingFunction($shop, $ownershipRequest, $message);
     }
 
-    public function rejectingOwnerShipTransferStatus($ownershipRequest)
+    public function rejectingOwnerShipTransferStatus(OwnershipTransfer $ownershipRequest): void
     {
         // disable shop
         $shop = $ownershipRequest->shop;
@@ -82,7 +82,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
         $this->notificationThrowingFunction($shop, $ownershipRequest, $message);
     }
 
-    public function notificationThrowingFunction($shop, $ownershipRequest, $message)
+    public function notificationThrowingFunction(Shop $shop, OwnershipTransfer $ownershipRequest, array $message): void
     {
         $previousOwner = User::findOrFail($ownershipRequest->from);
         $newOwner = User::findOrFail($ownershipRequest->to);
