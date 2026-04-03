@@ -10,7 +10,7 @@ use Modules\Notification\Services\NotificationService;
 
 class DeliveryScheduledListener
 {
-    public function __construct(private NotificationService $notificationService) {}
+    public function __construct(private readonly NotificationService $notificationService) {}
 
     public function handle(DeliveryScheduledEvent $event): void
     {

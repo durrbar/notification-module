@@ -10,7 +10,7 @@ use Modules\Notification\Services\NotificationService;
 
 class DeliveryCompletedListener
 {
-    public function __construct(private NotificationService $notificationService) {}
+    public function __construct(private readonly NotificationService $notificationService) {}
 
     /**
      * Handle the event.
