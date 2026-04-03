@@ -18,7 +18,6 @@ class SendReviewNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @return void
      */
     public function handle(ReviewCreated $event): void
     {

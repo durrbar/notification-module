@@ -21,7 +21,6 @@ class SendOrderDeliveredNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @return void
      */
     public function handle(OrderDelivered $event): void
     {

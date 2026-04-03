@@ -20,7 +20,6 @@ class SendOrderCreationNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @return void
      */
     public function handle(OrderCreated $event): void
     {

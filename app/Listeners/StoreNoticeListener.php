@@ -14,19 +14,7 @@ use Modules\Vendor\Events\StoreNoticeEvent;
 class StoreNoticeListener implements ShouldQueue
 {
     /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
-     *
-     * @return void
      */
     public function handle(StoreNoticeEvent $event): void
     {

@@ -20,7 +20,6 @@ class SendPaymentFailedNotification implements ShouldQueue
     /**
      * Handle the event.
      *
-     * @return void
      */
     public function handle(PaymentFailed $event): void
     {
