@@ -46,7 +46,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
      *
      * @param  mixed  $notifiable
      */
-    final public function via($notifiable): array
+    final public function via(mixed $notifiable): array
     {
         return $this->resolveChannels();
     }
@@ -80,7 +80,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
      *
      * @param  mixed  $notifiable
      */
-    final public function toMail($notifiable): MailMessage
+    final public function toMail(mixed $notifiable): MailMessage
     {
         $mail = new MailMessage();
 
