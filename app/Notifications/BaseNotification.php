@@ -29,7 +29,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
      * @param  mixed  $data
      * @param  mixed  $user
      */
-    public function __construct($data, $user)
+    public function __construct(mixed $data, mixed $user)
     {
         $this->data = $data;
         $this->user = $user;
@@ -101,7 +101,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
     /**
      * Get the SMS representation of the notification.
      */
-    final public function toSms($notifiable)
+    final public function toSms(mixed $notifiable)
     {
         // Example implementation (commented out):
         // return (new \Illuminate\Notifications\Messages\NexmoMessage)
@@ -113,7 +113,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
      *
      * @param  mixed  $notifiable
      */
-    final public function toDatabase($notifiable): array
+    final public function toDatabase(mixed $notifiable): array
     {
         return $this->notificationPayload();
     }
@@ -123,7 +123,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
      *
      * @param  mixed  $notifiable
      */
-    final public function toBroadcast($notifiable): BroadcastMessage
+    final public function toBroadcast(mixed $notifiable): BroadcastMessage
     {
         // $type = static::NOTIFICATION_TYPE ?: Str::kebab(class_basename(static::class));
 

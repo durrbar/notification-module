@@ -13,7 +13,7 @@ class TestNotification extends BaseNotification
     /**
      * Create a new notification instance.
      */
-    public function __construct($data, $preferences)
+    public function __construct(mixed $data, mixed $preferences)
     {
         parent::__construct($data, $preferences);
     }

@@ -16,7 +16,7 @@ class DeliveryScheduledNotification extends BaseNotification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Delivery $delivery, $user)
+    public function __construct(Delivery $delivery, mixed $user)
     {
         $this->delivery = $delivery;
 

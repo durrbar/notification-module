@@ -32,7 +32,7 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
      * @param  mixed  $optional
      * @return void
      */
-    public function __construct($shop, $previousOwner, $newOwner, $optional = null)
+    public function __construct(mixed $shop, mixed $previousOwner, mixed $newOwner, mixed $optional = null)
     {
         $this->shop = $shop;
         $this->previousOwner = $previousOwner;

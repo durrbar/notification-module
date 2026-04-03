@@ -20,7 +20,7 @@ class MessageReminder extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($participant)
+    public function __construct(mixed $participant)
     {
         $this->participant = $participant;
     }

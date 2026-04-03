@@ -16,7 +16,7 @@ class InvoiceCreatedNotification extends BaseNotification
     /**
      * Create a new notification instance.
      */
-    public function __construct(Invoice $invoice, $user)
+    public function __construct(Invoice $invoice, mixed $user)
     {
         $this->invoice = $invoice;
 

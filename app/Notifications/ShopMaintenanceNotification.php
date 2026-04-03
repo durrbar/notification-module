@@ -26,7 +26,7 @@ class ShopMaintenanceNotification extends Notification implements ShouldQueue
      * @param  $settings
      * @return void
      */
-    public function __construct($shop, $body, $message)
+    public function __construct(mixed $shop, mixed $body, mixed $message)
     {
         $this->shop = $shop;
         $this->body = $body;

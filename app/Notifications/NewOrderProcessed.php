@@ -19,7 +19,7 @@ class NewOrderProcessed extends BaseNotification
      *
      * @return void
      */
-    public function __construct(Order $order, $user)
+    public function __construct(Order $order, mixed $user)
     {
         $this->order = $order;
 

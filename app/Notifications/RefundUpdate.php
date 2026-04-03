@@ -24,7 +24,7 @@ class RefundUpdate extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Refund $refund, $receiver = 'admin')
+    public function __construct(Refund $refund, mixed $receiver = 'admin')
     {
         $this->refund = $refund;
         $this->receiver = $receiver;
