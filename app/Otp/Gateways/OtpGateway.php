@@ -12,7 +12,7 @@ use Modules\Notification\Otp\OtpInterface;
  */
 class OtpGateway
 {
-    public function __construct(private OtpInterface $gateway) {}
+    public function __construct(private readonly OtpInterface $gateway) {}
 
     public function startVerification(mixed $phone_number): mixed
     {
