@@ -15,31 +15,16 @@ class NewOrderReceived extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(
         protected readonly Order $order,
         protected readonly string $receiver = 'storeOwner'
     ) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
         App::setLocale($this->order->language ?? DEFAULT_LANGUAGE);
@@ -58,16 +43,8 @@ class NewOrderReceived extends Notification implements ShouldQueue
             ->markdown('notification::emails.order.order-received', ['order' => $this->order, 'customer' => $customer, 'receiver' => $this->receiver, 'url' => $url]);
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

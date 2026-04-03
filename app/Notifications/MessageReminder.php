@@ -13,47 +13,24 @@ class MessageReminder extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly mixed $participant) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $prefix = ($this->participant->type === 'user') ? 'message' : 'shop-message';
+        $prefix = $this->participant->type === 'user' ? 'message' : 'shop-message';
         $url = config('shop.dashboard_url').'/'.$prefix.'/'.$this->participant->conversation_id;
 
         return (new MailMessage())
             ->markdown('notification::emails.message.reminder', ['participant' => $this->participant, 'url' => $url]);
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

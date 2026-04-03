@@ -15,50 +15,24 @@ class NewReviewCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly Review $review) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
-        $url = '';
         $product = Product::findOrFail($this->review->product_id);
-        if ($product) {
-            $url = config('shop.shop_url').'/products/'.$product->slug;
-        }
+        $url = config('shop.shop_url').'/products/'.$product->slug;
 
         return (new MailMessage())
             ->markdown('notification::emails.review.created', ['review' => $this->review, 'url' => $url, 'product' => $product]);
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

@@ -15,33 +15,16 @@ class RefundRequested extends Notification implements ShouldQueue
 {
     use Queueable;
 
-
-
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(
         protected readonly Refund $refund,
         protected readonly string $receiver = 'admin'
     ) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
         $order = $this->refund->order;
@@ -70,19 +53,10 @@ class RefundRequested extends Notification implements ShouldQueue
                 'url' => $url,
                 'receiver' => $this->receiver,
             ]);
-
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
