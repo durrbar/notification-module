@@ -12,24 +12,19 @@ use Modules\Notification\Otp\OtpInterface;
  */
 class OtpGateway
 {
-    private $gateway;
+    public function __construct(private OtpInterface $gateway) {}
 
-    public function __construct(OtpInterface $gateway)
-    {
-        $this->gateway = $gateway;
-    }
-
-    public function startVerification($phone_number)
+    public function startVerification(mixed $phone_number): mixed
     {
         return $this->gateway->startVerification($phone_number);
     }
 
-    public function checkVerification($id, $code, $phone_number)
+    public function checkVerification(mixed $id, mixed $code, mixed $phone_number): mixed
     {
         return $this->gateway->checkVerification($id, $code, $phone_number);
     }
 
-    public function sendSms($phone_number, $messageBody)
+    public function sendSms(mixed $phone_number, mixed $messageBody): mixed
     {
         return $this->gateway->sendSms($phone_number, $messageBody);
     }
