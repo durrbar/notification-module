@@ -15,7 +15,7 @@ use Modules\Notification\Resources\UserNotificationPreferenceResource;
 
 class UserNotificationPreferenceController extends CoreController
 {
-    public function __construct(protected UserNotificationPreferenceRepository $repository)
+    public function __construct(protected readonly UserNotificationPreferenceRepository $repository)
     {
         //
     }
