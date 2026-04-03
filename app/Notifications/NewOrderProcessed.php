@@ -11,9 +11,6 @@ class NewOrderProcessed extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'order';
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly Order $order, mixed $user)
     {
         parent::__construct($order, $user);

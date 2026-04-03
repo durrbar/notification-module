@@ -11,9 +11,6 @@ class DeliveryScheduledNotification extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'delivery';
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly Delivery $delivery, mixed $user)
     {
         parent::__construct($delivery, $user);

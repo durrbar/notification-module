@@ -14,28 +14,13 @@ class ProductRejectedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly Product $product) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage())
@@ -49,16 +34,8 @@ class ProductRejectedNotification extends Notification implements ShouldQueue
             );
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }

@@ -11,9 +11,6 @@ class InvoiceCreatedNotification extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'invoice';
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(protected readonly Invoice $invoice, mixed $user)
     {
         parent::__construct($invoice, $user);

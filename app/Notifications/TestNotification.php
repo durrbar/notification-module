@@ -10,13 +10,7 @@ class TestNotification extends BaseNotification
 {
     public const string NOTIFICATION_TYPE = 'order';
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct(mixed $data, mixed $preferences)
-    {
-        parent::__construct($data, $preferences);
-    }
+    public function __construct(mixed $data, mixed $preferences) { parent::__construct($data, $preferences); }
 
     /**
      * Get the avatar URL for the notification.
@@ -71,9 +65,7 @@ class TestNotification extends BaseNotification
      */
     public function getMailBody(MailMessage $mail): void
     {
-        $mail->greeting(__('notification::delivery.completed.mail_greeting', [
-            'name' => $this->user->name,
-        ]))
+        $mail->greeting(__('notification::delivery.completed.mail_greeting', ['name' => $this->user->name]))
             ->line($this->getMessageText())
             ->action(
                 __('notification::delivery.completed.view_order_details'),

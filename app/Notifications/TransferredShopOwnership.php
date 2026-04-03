@@ -15,9 +15,6 @@ class TransferredShopOwnership extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
     public function __construct(
         protected readonly Shop $shop,
         protected readonly User $previousOwner,
@@ -25,23 +22,11 @@ class TransferredShopOwnership extends Notification implements ShouldQueue
         protected readonly ?array $optional = null
     ) {}
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
-     */
     public function toMail(mixed $notifiable): MailMessage
     {
         $url = config('shop.dashboard_url')."/{$this->shop->slug}";
@@ -63,16 +48,8 @@ class TransferredShopOwnership extends Notification implements ShouldQueue
             );
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray(mixed $notifiable): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 }
