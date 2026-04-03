@@ -36,7 +36,7 @@ class StoreNoticeNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -47,7 +47,7 @@ class StoreNoticeNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         if ($this->storeNotice->creator->hasPermissionTo(Permission::SuperAdmin->value)) {
             $role = 'Admin';

@@ -36,7 +36,7 @@ class RefundUpdate extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via(mixed $notifiable): array
     {
         return ['mail'];
     }
@@ -47,7 +47,7 @@ class RefundUpdate extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail(mixed $notifiable): MailMessage
     {
         $order = $this->refund->order;
         App::setLocale($order->language ?? DEFAULT_LANGUAGE);
