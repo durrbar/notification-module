@@ -65,7 +65,7 @@ class PaymentFailedNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray(mixed $notifiable): array
     {
         return [
             //
