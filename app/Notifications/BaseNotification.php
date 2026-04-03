@@ -101,7 +101,7 @@ abstract class BaseNotification extends Notification implements NotificationCont
     /**
      * Get the SMS representation of the notification.
      */
-    final public function toSms(mixed $notifiable)
+    final public function toSms(mixed $notifiable): void
     {
         // Example implementation (commented out):
         // return (new \Illuminate\Notifications\Messages\NexmoMessage)
