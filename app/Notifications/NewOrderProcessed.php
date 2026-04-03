@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace Modules\Notification\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 use Modules\Order\Models\Order;
 
 class NewOrderProcessed extends BaseNotification
 {
     public const NOTIFICATION_TYPE = 'order';
 
-    protected Order $order;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Order $order, mixed $user)
+    public function __construct(protected readonly Order $order, mixed $user)
     {
-        $this->order = $order;
-
         parent::__construct($order, $user);
     }
 

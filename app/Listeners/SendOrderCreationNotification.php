@@ -22,7 +22,7 @@ class SendOrderCreationNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(OrderCreated $event)
+    public function handle(OrderCreated $event): void
     {
         $order = $event->order;
         $customer = $event->order->customer;

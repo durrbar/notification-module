@@ -31,7 +31,7 @@ class TransferredShopOwnershipNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(ProcessOwnershipTransition $event)
+    public function handle(ProcessOwnershipTransition $event): void
     {
         try {
             $shop = $event->shop;

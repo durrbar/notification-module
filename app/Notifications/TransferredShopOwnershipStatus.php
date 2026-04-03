@@ -19,10 +19,10 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
      * Create a new notification instance.
      */
     public function __construct(
-        public Shop $shop,
-        public User $previousOwner,
-        public User $newOwner,
-        public ?array $optional = null
+        protected readonly Shop $shop,
+        protected readonly User $previousOwner,
+        protected readonly User $newOwner,
+        protected readonly ?array $optional = null
     ) {}
 
     /**

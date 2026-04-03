@@ -23,7 +23,7 @@ class SendOrderCancelledNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(OrderCancelled $event)
+    public function handle(OrderCancelled $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCancelled->value, $event->order->language);
         if ($emailReceiver['customer'] && $event->order->customer && $event->order->parent_id === null) {

@@ -22,7 +22,7 @@ class SendPaymentFailedNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(PaymentFailed $event)
+    public function handle(PaymentFailed $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderPaymentFailed->value, $event->order->language ?? DEFAULT_LANGUAGE);
         if ($emailReceiver['vendor']) {

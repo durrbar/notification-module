@@ -18,7 +18,7 @@ class NewReviewCreated extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Review $review) {}
+    public function __construct(protected readonly Review $review) {}
 
     /**
      * Get the notification's delivery channels.

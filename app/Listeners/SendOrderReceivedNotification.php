@@ -19,7 +19,7 @@ class SendOrderReceivedNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(OrderReceived $event)
+    public function handle(OrderReceived $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::OrderCreated->value, $event->order->language);
         if ($emailReceiver['vendor']) {

@@ -22,7 +22,7 @@ class SendOrderStatusChangedNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(OrderStatusChanged $event)
+    public function handle(OrderStatusChanged $event): void
     {
 
         $order = $event->order;

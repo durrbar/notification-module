@@ -12,7 +12,7 @@ class DeliveryScheduledListener
 {
     public function __construct(private NotificationService $notificationService) {}
 
-    public function handle(DeliveryScheduledEvent $event)
+    public function handle(DeliveryScheduledEvent $event): void
     {
         $delivery = $event->delivery;
         $user = $delivery->order->customer;

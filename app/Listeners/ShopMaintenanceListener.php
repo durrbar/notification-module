@@ -21,7 +21,7 @@ class ShopMaintenanceListener implements ShouldQueue
      *
      * @return void
      */
-    public function handle(ShopMaintenance $event)
+    public function handle(ShopMaintenance $event): void
     {
         $action = $event->action;
         $shop = $event->shop;

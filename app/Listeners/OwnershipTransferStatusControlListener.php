@@ -24,7 +24,7 @@ class OwnershipTransferStatusControlListener implements ShouldQueue
      *
      * @return void
      */
-    public function handle(OwnershipTransferStatusControl $event)
+    public function handle(OwnershipTransferStatusControl $event): void
     {
         switch ($event->ownershipTransfer->status) {
             case DefaultStatusType::Processing->value:

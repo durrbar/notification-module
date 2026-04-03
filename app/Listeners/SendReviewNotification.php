@@ -20,7 +20,7 @@ class SendReviewNotification implements ShouldQueue
      *
      * @return void
      */
-    public function handle(ReviewCreated $event)
+    public function handle(ReviewCreated $event): void
     {
         $emailReceiver = $this->getWhichUserWillGetEmail(EventType::ReviewCreated->value, $event->review->language ?? DEFAULT_LANGUAGE);
         if ($emailReceiver['vendor']) {

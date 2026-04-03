@@ -15,17 +15,11 @@ class OrderStatusChangedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $order;
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Order $order)
-    {
-        $this->order = $order;
-    }
+    public function __construct(protected readonly Order $order) {}
 
     /**
      * Get the notification's delivery channels.

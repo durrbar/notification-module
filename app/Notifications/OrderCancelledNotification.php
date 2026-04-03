@@ -17,17 +17,10 @@ class OrderCancelledNotification extends Notification implements ShouldQueue
     use Queueable;
     use SmsTrait;
 
-    protected $order;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Order $order)
-    {
-        $this->order = $order;
-    }
+    public function __construct(protected readonly Order $order) {}
 
     /**
      * Get the notification's delivery channels.
@@ -48,7 +41,7 @@ class OrderCancelledNotification extends Notification implements ShouldQueue
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        App::setLocale($this->order->language);
+        App::setLocale($this->order->language ?? DEFAULT_LANGUAGE);
 
         return (new MailMessage())
             ->subject(__('notification::sms.order.cancelOrder.admin.subject'))

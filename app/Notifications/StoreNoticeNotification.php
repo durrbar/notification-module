@@ -15,20 +15,13 @@ class StoreNoticeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $storeNotice;
-
-    protected $action;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(StoreNotice $storeNotice, ?string $action)
-    {
-        $this->storeNotice = $storeNotice;
-        $this->action = $action;
-    }
+    public function __construct(
+        protected readonly StoreNotice $storeNotice,
+        protected readonly ?string $action
+    ) {}
 
     /**
      * Get the notification's delivery channels.
@@ -49,11 +42,9 @@ class StoreNoticeNotification extends Notification implements ShouldQueue
      */
     public function toMail(mixed $notifiable): MailMessage
     {
-        if ($this->storeNotice->creator->hasPermissionTo(Permission::SuperAdmin->value)) {
-            $role = 'Admin';
-        } else {
-            $role = 'Shop Owner';
-        }
+        $role = $this->storeNotice->creator->hasPermissionTo(Permission::SuperAdmin->value)
+            ? 'Admin'
+            : 'Shop Owner';
 
         return (new MailMessage())
             ->subject('Notice From '.$role.'.')

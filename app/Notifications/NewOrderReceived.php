@@ -15,20 +15,13 @@ class NewOrderReceived extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $order;
-
-    protected string $receiver;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Order $order, string $receiver = 'storeOwner')
-    {
-        $this->order = $order;
-        $this->receiver = $receiver;
-    }
+    public function __construct(
+        protected readonly Order $order,
+        protected readonly string $receiver = 'storeOwner'
+    ) {}
 
     /**
      * Get the notification's delivery channels.
@@ -50,12 +43,8 @@ class NewOrderReceived extends Notification implements ShouldQueue
     public function toMail(mixed $notifiable): MailMessage
     {
         App::setLocale($this->order->language ?? DEFAULT_LANGUAGE);
-        $customer = $this->order->customer ?? null;
-        if (! $customer) {
-            $customer = 'Guest Customer';
-        } else {
-            $customer = $customer->name;
-        }
+        $customer = $this->order->customer?->name ?? 'Guest Customer';
+
         if ($this->receiver === 'admin') {
             $subject = __('notification::sms.order.orderCreated.admin.subject');
             $url = config('shop.dashboard_url').'/orders/'.$this->order->id;

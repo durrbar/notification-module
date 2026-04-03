@@ -16,7 +16,7 @@ class MessageReminder extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(public mixed $participant) {}
+    public function __construct(protected readonly mixed $participant) {}
 
     /**
      * Get the notification's delivery channels.

@@ -17,7 +17,11 @@ class ShopMaintenanceNotification extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(public mixed $shop, public mixed $body, public mixed $message) {}
+    public function __construct(
+        protected readonly mixed $shop,
+        protected readonly mixed $body,
+        protected readonly mixed $message
+    ) {}
 
     /**
      * Get the notification's delivery channels.

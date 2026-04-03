@@ -12,7 +12,7 @@ class InvoiceCreatedListener
 {
     public function __construct(private NotificationService $notificationService) {}
 
-    public function handle(InvoiceCreatedEvent $event)
+    public function handle(InvoiceCreatedEvent $event): void
     {
         $invoice = $event->invoice;
         $user = $invoice->order->customer;

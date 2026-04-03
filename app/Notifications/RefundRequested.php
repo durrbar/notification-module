@@ -15,20 +15,15 @@ class RefundRequested extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected $refund;
 
-    protected string $receiver;
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Refund $refund, mixed $receiver = 'admin')
-    {
-        $this->refund = $refund;
-        $this->receiver = $receiver;
-    }
+    public function __construct(
+        protected readonly Refund $refund,
+        protected readonly string $receiver = 'admin'
+    ) {}
 
     /**
      * Get the notification's delivery channels.

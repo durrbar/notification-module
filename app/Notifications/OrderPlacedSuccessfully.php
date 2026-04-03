@@ -16,17 +16,11 @@ class OrderPlacedSuccessfully extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    protected array $invoiceData;
 
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(array $invoiceData)
-    {
-        $this->invoiceData = $invoiceData;
-    }
+    public function __construct(protected readonly array $invoiceData) {}
 
     /**
      * Get the notification's delivery channels.
