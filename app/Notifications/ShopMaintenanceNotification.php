@@ -14,24 +14,10 @@ class ShopMaintenanceNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $shop;
-
-    public $body;
-
-    public $message;
-
     /**
      * Create a new notification instance.
-     *
-     * @param  $settings
-     * @return void
      */
-    public function __construct(mixed $shop, mixed $body, mixed $message)
-    {
-        $this->shop = $shop;
-        $this->body = $body;
-        $this->message = $message;
-    }
+    public function __construct(public mixed $shop, public mixed $body, public mixed $message) {}
 
     /**
      * Get the notification's delivery channels.

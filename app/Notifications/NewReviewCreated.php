@@ -15,17 +15,10 @@ class NewReviewCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $review;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Review $review)
-    {
-        $this->review = $review;
-    }
+    public function __construct(public Review $review) {}
 
     /**
      * Get the notification's delivery channels.

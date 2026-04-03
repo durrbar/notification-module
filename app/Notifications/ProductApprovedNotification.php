@@ -14,17 +14,10 @@ class ProductApprovedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $product;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(Product $product)
-    {
-        $this->product = $product;
-    }
+    public function __construct(public Product $product) {}
 
     /**
      * Get the notification's delivery channels.

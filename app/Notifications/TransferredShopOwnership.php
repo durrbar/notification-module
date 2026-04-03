@@ -15,30 +15,15 @@ class TransferredShopOwnership extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $shop;
-
-    public $previousOwner;
-
-    public $newOwner;
-
-    public $optional;
-
     /**
      * Create a new notification instance.
-     *
-     * @param  Shop  $shop
-     * @param  User  $previousOwner
-     * @param  User  $newOwner
-     * @param  mixed  $optional
-     * @return void
      */
-    public function __construct(mixed $shop, mixed $previousOwner, mixed $newOwner, mixed $optional = null)
-    {
-        $this->shop = $shop;
-        $this->previousOwner = $previousOwner;
-        $this->newOwner = $newOwner;
-        $this->optional = $optional;
-    }
+    public function __construct(
+        public Shop $shop,
+        public User $previousOwner,
+        public User $newOwner,
+        public ?array $optional = null
+    ) {}
 
     /**
      * Get the notification's delivery channels.

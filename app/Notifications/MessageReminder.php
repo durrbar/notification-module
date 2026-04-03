@@ -13,17 +13,10 @@ class MessageReminder extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $participant;
-
     /**
      * Create a new notification instance.
-     *
-     * @return void
      */
-    public function __construct(mixed $participant)
-    {
-        $this->participant = $participant;
-    }
+    public function __construct(public mixed $participant) {}
 
     /**
      * Get the notification's delivery channels.

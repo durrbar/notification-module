@@ -8,43 +8,25 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Modules\Ecommerce\Models\User;
+use Modules\User\Models\User;
 use Modules\Vendor\Models\Shop;
 
 class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $shop;
-
-    public $previousOwner;
-
-    public $newOwner;
-
-    public $optional;
-
     /**
      * Create a new notification instance.
-     *
-     * @param  Shop  $shop
-     * @param  User  $previousOwner
-     * @param  User  $newOwner
-     * @param  mixed  $optional
-     * @return void
      */
-    public function __construct(mixed $shop, mixed $previousOwner, mixed $newOwner, mixed $optional = null)
-    {
-        $this->shop = $shop;
-        $this->previousOwner = $previousOwner;
-        $this->newOwner = $newOwner;
-        $this->optional = $optional;
-    }
+    public function __construct(
+        public Shop $shop,
+        public User $previousOwner,
+        public User $newOwner,
+        public ?array $optional = null
+    ) {}
 
     /**
      * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function via(mixed $notifiable): array
     {
@@ -53,9 +35,6 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
 
     /**
      * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return MailMessage
      */
     public function toMail(mixed $notifiable): MailMessage
     {
@@ -80,9 +59,6 @@ class TransferredShopOwnershipStatus extends Notification implements ShouldQueue
 
     /**
      * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
      */
     public function toArray(mixed $notifiable): array
     {
